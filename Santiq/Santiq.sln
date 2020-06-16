@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Santiq", "Santiq.csproj", "{0717C180-CEA4-42FA-8670-668FDE58107E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0717C180-CEA4-42FA-8670-668FDE58107E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0717C180-CEA4-42FA-8670-668FDE58107E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0717C180-CEA4-42FA-8670-668FDE58107E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0717C180-CEA4-42FA-8670-668FDE58107E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC3EC5B8-5F7D-448F-8ABF-86174CDF1E29}
+	EndGlobalSection
+EndGlobal
