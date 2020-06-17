@@ -31,32 +31,25 @@ interface ReceiveAlertsAction {
 
 type KnownAction = RequestAlertsAction | ReceiveAlertsAction;
 
-// ----------------
-// ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
-// They don't directly mutate state, but they can have external side-effects (such as loading data).
-
 export const actionCreators = {
     requestAlerts: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        // Only load data if it's something we don't already have (and are not already loading)
+
         const appState = getState();
-        if (appState && appState.alerts && startDateIndex !== appState.weatherForecasts.startDateIndex) {
-            fetch(`weatherforecast`)
-                .then(response => response.json() as Promise<WeatherForecast[]>)
+        if (appState && appState.alerts) {
+            fetch(`api/alerts`)
+                .then(response => response.json() as Promise<Alert[]>)
                 .then(data => {
-                    dispatch({ type: 'RECEIVE_ALERTS', startDateIndex: startDateIndex, forecasts: data });
+                    dispatch({ type: 'RECEIVE_ALERTS', alerts: data });
                 });
 
-            dispatch({ type: 'REQUEST_ALERTS', startDateIndex: startDateIndex });
+            dispatch({ type: 'REQUEST_ALERTS' });
         }
     }
 };
 
-// ----------------
-// REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
+const unloadedState: AlertState = { alerts: [], isLoading: false };
 
-const unloadedState: WeatherForecastsState = { forecasts: [], isLoading: false };
-
-export const reducer: Reducer<WeatherForecastsState> = (state: WeatherForecastsState | undefined, incomingAction: Action): WeatherForecastsState => {
+export const reducer: Reducer<AlertState> = (state: AlertState | undefined, incomingAction: Action): AlertState => {
     if (state === undefined) {
         return unloadedState;
     }
@@ -65,20 +58,15 @@ export const reducer: Reducer<WeatherForecastsState> = (state: WeatherForecastsS
     switch (action.type) {
         case 'REQUEST_ALERTS':
             return {
-                startDateIndex: action.startDateIndex,
-                forecasts: state.forecasts,
+                alerts: state.alerts,
                 isLoading: true
             };
         case 'RECEIVE_ALERTS':
-            // Only accept the incoming data if it matches the most recent request. This ensures we correctly
-            // handle out-of-order responses.
-            if (action.startDateIndex === state.startDateIndex) {
-                return {
-                    startDateIndex: action.startDateIndex,
-                    forecasts: action.forecasts,
-                    isLoading: false
-                };
-            }
+            return {
+                alerts: action.alerts,
+                isLoading: false
+            };
+        default:
             break;
     }
 
