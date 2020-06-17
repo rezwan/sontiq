@@ -18,39 +18,104 @@ namespace Santiq.Data
                     IsThreat = false,
                     UserFirstName = "Atiq",
                     UserLastName = "Ahammed",
-                    ServiceKey = "4foisWfsd3ee34"
+                    ServiceKey = "4foisWfsd3ee34",
+                    UserId = "234",
+                    UserIsChild = false,
+                    GeneratedOn = "01-02-2020",
+                    AcknowledgedOn = "03-02-2020",
+                    Viewed = false,
+                    AlertTypeName = "Three Bureau Monitoring Alert",
+                    Category = "CREDIT",
+                    AvailableSubResource = "three-monitoring",
+                    Status = "New",
+                    Description = "test Desctiopin sdas asfdsfj sdfasdf asdfasdf sfasdf sdfasdf sadfasdf sdf",
+                    Title = "Credit Monitoring",
+                    DisplayName = "Credit Monitoring",
+                    ResolveDate = "05-02-2020"
                 },
                 new Alert
                 {
-                    Id = 2,
+                    Id = 123,
                     IsThreat = false,
                     UserFirstName = "Atiq",
                     UserLastName = "Ahammed",
-                    ServiceKey = "4foisWfsd3ee34"
+                    ServiceKey = "4foisWfsd3ee34",
+                    UserId = "234",
+                    UserIsChild = false,
+                    GeneratedOn = "01-02-2020",
+                    AcknowledgedOn = "03-02-2020",
+                    Viewed = true,
+                    AlertTypeName = "Three Bureau Monitoring Alert",
+                    Category = "CREDIT",
+                    AvailableSubResource = "three-monitoring",
+                    Status = "In Pregress",
+                    Description = "test Desctiopin sdas asfdsfj sdfasdf asdfasdf sfasdf sdfasdf sadfasdf sdf",
+                    Title = "Credit Monitoring",
+                    DisplayName = "Credit Monitoring",
+                    ResolveDate = "05-02-2020"
                 },
                 new Alert
                 {
-                    Id = 3,
+                    Id = 987,
                     IsThreat = false,
                     UserFirstName = "Atiq",
                     UserLastName = "Ahammed",
-                    ServiceKey = "4foisWfsd3ee34"
+                    ServiceKey = "4foisWfsd3ee34",
+                    UserId = "234",
+                    UserIsChild = false,
+                    GeneratedOn = "01-02-2020",
+                    AcknowledgedOn = "03-02-2020",
+                    Viewed = true,
+                    AlertTypeName = "Three Bureau Monitoring Alert",
+                    Category = "CREDIT",
+                    AvailableSubResource = "three-monitoring",
+                    Status = "Resolved",
+                    Description = "test Desctiopin sdas asfdsfj sdfasdf asdfasdf sfasdf sdfasdf sadfasdf sdf",
+                    Title = "Credit Monitoring",
+                    DisplayName = "Credit Monitoring",
+                    ResolveDate = "05-02-2020"
                 },
                 new Alert
                 {
-                    Id = 3,
+                    Id = 234,
                     IsThreat = false,
                     UserFirstName = "Atiq",
                     UserLastName = "Ahammed",
-                    ServiceKey = "4foisWfsd3ee34"
+                    ServiceKey = "4foisWfsd3ee34",
+                    UserId = "234",
+                    UserIsChild = false,
+                    GeneratedOn = "01-02-2020",
+                    AcknowledgedOn = "03-02-2020",
+                    Viewed = true,
+                    AlertTypeName = "Three Bureau Monitoring Alert",
+                    Category = "CREDIT",
+                    AvailableSubResource = "three-monitoring",
+                    Status = "New",
+                    Description = "test Desctiopin sdas asfdsfj sdfasdf asdfasdf sfasdf sdfasdf sadfasdf sdf",
+                    Title = "Credit Monitoring",
+                    DisplayName = "Credit Monitoring",
+                    ResolveDate = "05-02-2020"
                 },
                 new Alert
                 {
-                    Id = 4,
+                    Id = 3456,
                     IsThreat = false,
                     UserFirstName = "Atiq",
                     UserLastName = "Ahammed",
-                    ServiceKey = "4foisWfsd3ee34"
+                    ServiceKey = "4foisWfsd3ee34",
+                    UserId = "234",
+                    UserIsChild = false,
+                    GeneratedOn = "01-01-2020",
+                    AcknowledgedOn = "01-02-2020",
+                    Viewed = false,
+                    AlertTypeName = "Three Bureau Monitoring Alert",
+                    Category = "CREDIT",
+                    AvailableSubResource = "three-monitoring",
+                    Status = "New",
+                    Description = "test Desctiopin sdas asfdsfj sdfasdf asdfasdf sfasdf sdfasdf sadfasdf sdf",
+                    Title = "Credit Monitoring",
+                    DisplayName = "Credit Monitoring",
+                    ResolveDate = "05-02-2020"
                 },
             };
 
@@ -61,11 +126,24 @@ namespace Santiq.Data
         {
             return new Alert
             {
-                Id = 1,
+                Id = 234,
                 IsThreat = false,
                 UserFirstName = "Atiq",
                 UserLastName = "Ahammed",
-                ServiceKey = "4foisWfsd3ee34"
+                ServiceKey = "4foisWfsd3ee34",
+                UserId = "234",
+                UserIsChild = false,
+                GeneratedOn = "01-02-2020",
+                AcknowledgedOn = "03-02-2020",
+                Viewed = true, 
+                AlertTypeName = "Three Bureau Monitoring Alert",
+                Category = "CREDIT",
+                AvailableSubResource = "three-monitoring",
+                Status = "New", 
+                Description = "test Desctiopin sdas asfdsfj sdfasdf asdfasdf sfasdf sdfasdf sadfasdf sdf", 
+                Title = "Credit Monitoring",
+                DisplayName = "Credit Monitoring",
+                ResolveDate = "05-02-2020"
             }; ;
         }
     }

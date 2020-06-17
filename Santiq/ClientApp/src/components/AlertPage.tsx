@@ -39,6 +39,12 @@ class AlertPage extends React.PureComponent<UserInfoProps> {
                 <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Title</th>
+                    <th>Generated On</th>
+                    <th>Acknowledge On</th>
+                    <th>Resolve Date</th>
+                    <th>Status</th>
+                    <th>Viewed</th>
                     <th>User First Name</th>
                     <th>User Last Name</th>
                     <th>Service Key</th>
@@ -48,6 +54,12 @@ class AlertPage extends React.PureComponent<UserInfoProps> {
                 {this.props.alerts.map((alert: Alert.Alert) =>
                     <tr key={alert.id}>
                         <td>{alert.id}</td>
+                        <td>{alert.title}</td>
+                        <td>{alert.generatedOn}</td>
+                        <td>{alert.acknowledgedOn}</td>
+                        <td>{alert.resolveDate}</td>
+                        <td>{alert.status}</td>
+                        <td>{alert.viewed ? "Yes" : "No"}</td>
                         <td>{alert.userFirstName}</td>
                         <td>{alert.userLastName}</td>
                         <td>{alert.serviceKey}</td>

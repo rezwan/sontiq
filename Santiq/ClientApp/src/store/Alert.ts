@@ -16,8 +16,20 @@ export interface Alert {
     userFirstName: string;
     userLastName: string;
     serviceKey: string;
+    userId: string;
+    userIsChild: boolean;
+    generatedOn: string;
+    acknowledgedOn: string;
+    viewed: boolean;
+    alertTypeName: string;
+    category: string;
+    availableSubResource: string;
+    status: string;
+    description: string;
+    title: string;
+    displayName: string;
+    resolveDate: string;
 }
-
 
 interface RequestAlertsAction {
     type: 'REQUEST_ALERTS';
