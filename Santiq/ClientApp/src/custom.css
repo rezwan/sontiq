@@ -1,19 +1,30 @@
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 code {
-  color: #E01A76;
+    color: #E01A76;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .subscription-list {
     list-style: none;
     margin-bottom: 10px;
+    margin-left: 33%;
+}
+
+.service-status-bar {
+    width: 200px;
+    height: 30px;
+    background-color: #29a329;
+    color: white;
+    padding: 6px;
+    font-size: 12px;
+    text-align: center;
 }
