@@ -7,6 +7,7 @@ import FetchData from './components/FetchData';
 
 import './custom.css'
 import UserInfo from './components/UserInfo';
+import AlertPage from './components/AlertPage';
 
 export default () => (
     <Layout>
@@ -14,5 +15,6 @@ export default () => (
         <Route path='/counter' component={Counter} />
         <Route path='/fetch-data/:startDateIndex?' component={FetchData} />
         <Route path='/user-info' component={UserInfo} />
+        <Route path='/alerts' component={AlertPage} />
     </Layout>
 );
