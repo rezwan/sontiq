@@ -6,7 +6,6 @@ import { AppThunkAction } from '.';
 
 export interface UserInfoState {
     isLoading: boolean;
-    startDateIndex?: number;
     userInfo: UserInfo;
 }
 
