@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Santiq.Data;
 using Santiq.Models;
+using Santiq.Service.Utils;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,6 +18,7 @@ namespace Santiq.Controllers
         [HttpGet]
         public ActionResult <IEnumerable<Alert>> GetAllAlerts()
         {
+
             var alertItems = _repository.GetAllAlerts();
             return Ok(alertItems);
         }

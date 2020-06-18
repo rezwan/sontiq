@@ -28,6 +28,7 @@ namespace Santiq
             {
                 configuration.RootPath = "ClientApp/build";
             });
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +57,7 @@ namespace Santiq
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
             });
-
+            app.UseSession();   
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";
