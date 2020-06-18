@@ -16,7 +16,7 @@ namespace Santiq.Models
         public bool UserIsChild { get; set; }
         public string GeneratedOn { get; set; }
         public string AcknowledgedOn { get; set; }
-        public bool Viewed { get; set; }
+        public int Viewed { get; set; }
         public string AlertTypeName { get; set; }
         public string Category { get; set; }
         public string AvailableSubResource { get; set; }
@@ -25,5 +25,17 @@ namespace Santiq.Models
         public string Title { get; set; }
         public string DisplayName { get; set; }
         public string ResolveDate { get; set; }
+        public string ThreatDate { get; set; }
+        public string ServiceType { get; set; }
+        public string CreatedDate { get; set; }
+        public string CreatedTime { get; set; }
+        public string Type { get; set; }
+        public string FirstViewDate { get; set; }
+        public bool HasError { get; set; }
+        public string CaseId { get; set; }
+        public string AlertCategory { get; set; }
+        public string[] Errors { get; set; }
+        public string[] TitleFields { get; set; }
+        public string[] MonitorTypes { get; set; }
     }
 }
