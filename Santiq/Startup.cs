@@ -28,6 +28,7 @@ namespace Santiq
             {
                 configuration.RootPath = "ClientApp/build";
             });
+            services.AddDistributedMemoryCache();
             services.AddSession();
         }
 
@@ -50,14 +51,14 @@ namespace Santiq
             app.UseSpaStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
             });
-            app.UseSession();   
+            
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";
