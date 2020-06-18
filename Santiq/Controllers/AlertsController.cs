@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Santiq.Data;
 using Santiq.Models;
@@ -16,10 +17,11 @@ namespace Santiq.Controllers
         private readonly MockAlertRepo _repository = new MockAlertRepo();
         // GET: api/<AlertsController>
         [HttpGet]
-        public ActionResult <IEnumerable<Alert>> GetAllAlerts()
+        public ActionResult <IEnumerable<Alert>> GetAllAlerts(int pageNo)
         {
 
-            var alertItems = _repository.GetAllAlerts();
+            var alertItems = _repository.GetAllAlerts(pageNo);
+            
             return Ok(alertItems);
         }
         [HttpGet("{id}")]

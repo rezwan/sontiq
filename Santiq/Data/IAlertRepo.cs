@@ -8,7 +8,7 @@ namespace Santiq.Data
 {
     interface IAlertRepo
     {
-        IEnumerable<Alert> GetAllAlerts();
+        IEnumerable<Alert> GetAllAlerts(int pageNo);
         Alert GetAlertById(int id);
     }
 }

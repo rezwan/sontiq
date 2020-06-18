@@ -8,7 +8,8 @@ import * as Alert from '../store/Alert';
 
 type UserInfoProps =
     Alert.AlertState
-    & typeof Alert.actionCreators;
+    & typeof Alert.actionCreators
+    & RouteComponentProps<{ startDateIndex: string }>;
 
 class AlertPage extends React.PureComponent<UserInfoProps> {
 
@@ -18,6 +19,7 @@ class AlertPage extends React.PureComponent<UserInfoProps> {
 
 
     public componentDidUpdate() {
+        this.ensureDataFetched();
     }
 
     public render() {
@@ -25,12 +27,28 @@ class AlertPage extends React.PureComponent<UserInfoProps> {
             <React.Fragment>
                 <h1 id="tabelLabel">Alerts</h1>
                 {this.renderForecastsTable()}
+                <br />
+                {this.renderPagination()}
             </React.Fragment>
         );
     }
 
     private ensureDataFetched() {
-        this.props.requestAlerts();
+        const startDateIndex = parseInt(this.props.match.params.startDateIndex, 10) || 1;
+        this.props.requestAlerts(startDateIndex);
+    }
+
+    private renderPagination() {
+        const prevStartDateIndex = (this.props.startDateIndex || 0) - 1;
+        const nextStartDateIndex = (this.props.startDateIndex || 0) + 1;
+
+        return (
+            <div className="d-flex justify-content-between">
+                <Link className='btn btn-outline-secondary btn-sm' to={`/alerts/${prevStartDateIndex}`}>Previous</Link>
+                {this.props.isLoading && <span>Loading...</span>}
+                <Link className='btn btn-outline-secondary btn-sm' to={`/alerts/${nextStartDateIndex}`}>Next</Link>
+            </div>
+        );
     }
 
     private renderForecastsTable() {
@@ -41,13 +59,12 @@ class AlertPage extends React.PureComponent<UserInfoProps> {
                     <th>ID</th>
                     <th>Title</th>
                     <th>Type</th>
-
                     <th>Display Name</th>
                     <th>Generated On</th>
-                    <th>Created</th>
-
-                    <th>Acknowledge On</th>
-                    <th>Threat Date</th>
+                        <th>Created</th>
+                        <th>Acknowledged On</th>
+                    {/*
+                     <th>Threat Date</th>
                     <th>Resolve Date</th>
                     <th>Status</th>
                     <th>Viewed</th>
@@ -58,12 +75,15 @@ class AlertPage extends React.PureComponent<UserInfoProps> {
                     <th>Service Key</th>
                     <th>Is Thread</th>
                     <th>Viewed</th>
-                        <th>Alert Type Name</th>
+                    <th>Alert Type Name</th>
                     <th>Case ID</th>
                     <th>Service Type</th>
                     <th>Category</th>
                     <th>Available Sub Resource</th>
                     <th>Description</th>
+                     
+                     */}
+                    
                 </tr>
                 </thead>
                 <tbody>
@@ -76,7 +96,8 @@ class AlertPage extends React.PureComponent<UserInfoProps> {
                         <td>{alert.generatedOn}</td>
                         <td>{alert.createdDate + " " + alert.createdTime}</td>
                         <td>{alert.acknowledgedOn}</td>
-                        <td>{alert.threatDate}</td>
+                        {/*
+                         <td>{alert.threatDate}</td>
                         <td>{alert.resolveDate}</td>
                         <td>{alert.status}</td>
                         <td>{alert.viewed ? "Yes" : "No"}</td>
@@ -93,12 +114,16 @@ class AlertPage extends React.PureComponent<UserInfoProps> {
                         <td>{alert.category}</td>
                         <td>{alert.availableSubResource}</td>
                         <td>{alert.description}</td>
+                         */}
+                        
                     </tr>
                 )}
                 </tbody>
             </table>
         );
     }
+
+
 }
 
 export default connect(

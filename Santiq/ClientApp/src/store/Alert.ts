@@ -6,6 +6,7 @@ import { AppThunkAction } from './';
 
 export interface AlertState {
     isLoading: boolean;
+    startDateIndex?: number;
     alerts: Alert[];
 }
 
@@ -44,28 +45,38 @@ export interface Alert {
 
 interface RequestAlertsAction {
     type: 'REQUEST_ALERTS';
+    startDateIndex: number;
 }
 
 interface ReceiveAlertsAction {
     type: 'RECEIVE_ALERTS';
-    alerts: any;
+    startDateIndex: number;
+    alerts: Alert[];
 }
 
 
 type KnownAction = RequestAlertsAction | ReceiveAlertsAction;
 
 export const actionCreators = {
-    requestAlerts: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
+    requestAlerts: (startDateIndex: number): AppThunkAction<KnownAction> => (dispatch, getState) => {
+
+        
+
 
         const appState = getState();
-        if (appState && appState.alerts) {
-            fetch(`api/alerts`)
+
+        console.log(startDateIndex);
+        console.log(appState);
+
+
+        if (appState && appState.alerts && startDateIndex !== appState.alerts.startDateIndex) {
+            fetch(`api/alerts?pageNo=${startDateIndex}`)
                 .then(response => response.json() as Promise<Alert[]>)
                 .then(data => {
-                    dispatch({ type: 'RECEIVE_ALERTS', alerts: data });
+                    dispatch({ type: 'RECEIVE_ALERTS', startDateIndex: startDateIndex, alerts: data });
                 });
 
-            dispatch({ type: 'REQUEST_ALERTS' });
+            dispatch({ type: 'REQUEST_ALERTS', startDateIndex: startDateIndex });
         }
     }
 };
@@ -81,11 +92,13 @@ export const reducer: Reducer<AlertState> = (state: AlertState | undefined, inco
     switch (action.type) {
         case 'REQUEST_ALERTS':
             return {
+                startDateIndex: action.startDateIndex,
                 alerts: state.alerts,
                 isLoading: true
             };
         case 'RECEIVE_ALERTS':
             return {
+                startDateIndex: action.startDateIndex,
                 alerts: action.alerts,
                 isLoading: false
             };
