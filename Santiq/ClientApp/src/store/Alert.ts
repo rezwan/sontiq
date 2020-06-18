@@ -6,7 +6,6 @@ import { AppThunkAction } from './';
 
 export interface AlertState {
     isLoading: boolean;
-    // startDateIndex?: number;
     alerts: Alert[];
 }
 
@@ -20,7 +19,7 @@ export interface Alert {
     userIsChild: boolean;
     generatedOn: string;
     acknowledgedOn: string;
-    viewed: boolean;
+    viewed: number;
     alertTypeName: string;
     category: string;
     availableSubResource: string;
@@ -29,6 +28,18 @@ export interface Alert {
     title: string;
     displayName: string;
     resolveDate: string;
+    threatDate: string;
+    serviceType: string;
+    createdDate: string;
+    createdTime: string;
+    type: string;
+    firstViewDate: string;
+    hasError: boolean;
+    caseId: string;
+    alertCategory: string;
+    errors: any;
+    titleFields: any;
+    monitorTypes: any;
 }
 
 interface RequestAlertsAction {

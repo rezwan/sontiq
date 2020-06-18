@@ -40,14 +40,30 @@ class AlertPage extends React.PureComponent<UserInfoProps> {
                 <tr>
                     <th>ID</th>
                     <th>Title</th>
+                    <th>Type</th>
+
+                    <th>Display Name</th>
                     <th>Generated On</th>
+                    <th>Created</th>
+
                     <th>Acknowledge On</th>
+                    <th>Threat Date</th>
                     <th>Resolve Date</th>
                     <th>Status</th>
                     <th>Viewed</th>
                     <th>User First Name</th>
                     <th>User Last Name</th>
+                    <th>User ID</th>
+                    <th>User Is Child</th>
                     <th>Service Key</th>
+                    <th>Is Thread</th>
+                    <th>Viewed</th>
+                        <th>Alert Type Name</th>
+                    <th>Case ID</th>
+                    <th>Service Type</th>
+                    <th>Category</th>
+                    <th>Available Sub Resource</th>
+                    <th>Description</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -55,14 +71,28 @@ class AlertPage extends React.PureComponent<UserInfoProps> {
                     <tr key={alert.id}>
                         <td>{alert.id}</td>
                         <td>{alert.title}</td>
+                        <td>{alert.type}</td>
+                        <td>{alert.displayName}</td>
                         <td>{alert.generatedOn}</td>
+                        <td>{alert.createdDate + " " + alert.createdTime}</td>
                         <td>{alert.acknowledgedOn}</td>
+                        <td>{alert.threatDate}</td>
                         <td>{alert.resolveDate}</td>
                         <td>{alert.status}</td>
                         <td>{alert.viewed ? "Yes" : "No"}</td>
                         <td>{alert.userFirstName}</td>
                         <td>{alert.userLastName}</td>
+                        <td>{alert.userId}</td>
+                        <td>{alert.userIsChild ? "Yes" : "No"}</td>
                         <td>{alert.serviceKey}</td>
+                        <td>{alert.isThreat ? "Yes" : "No"}</td>
+                        <td>{alert.viewed}</td>
+                        <td>{alert.alertTypeName}</td>
+                        <td>{alert.caseId}</td>
+                        <td>{alert.serviceType}</td>
+                        <td>{alert.category}</td>
+                        <td>{alert.availableSubResource}</td>
+                        <td>{alert.description}</td>
                     </tr>
                 )}
                 </tbody>
@@ -75,3 +105,4 @@ export default connect(
     (state: ApplicationState) => state.alerts,
     Alert.actionCreators
 )(AlertPage as any);
+
