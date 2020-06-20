@@ -4,31 +4,41 @@ using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json.Linq;
 using Sontiq.Implementation.Utils;
+using Sontiq.Models;
 
 namespace Sontiq.Implementation
 {
     public class AlertServiceIDF : AlertService
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        private ISession _session => _httpContextAccessor.HttpContext.Session;
 
-        public AlertServiceIDF(IHttpContextAccessor httpContextAccessor)
+        public AlertServiceIDF()
         {
-            _httpContextAccessor = httpContextAccessor;
         }
-        public override void AddToRequestParam()
+
+        protected override void AddToRequestParam()
         {
             List<dynamic> paramList = new List<dynamic>();
             dynamic reqParam = new ExpandoObject();
             reqParam.abc = "efg";
+             
+            // TODO: We will parse the value from request header or param
             RequestHeaders.Add(reqParam);
         }
 
-        public override string GetServiceEndPoint()
+        protected override List<AlertDTO> GetObjectMapping(JArray javascirptArray)
         {
-            _session.SetString("Test", "Ben Rules!");
-            var message = _session.GetString("Test");
+            List<AlertDTO> items = ((JArray)javascirptArray).Select(x => new AlertDTO
+            {
+                ID = (int)x["alert_id"],
+            }).ToList();
+
+            return items;
+        }
+
+        protected override string GetServiceEndPoint()
+        {
             var appSettingsJson = AppSettingsJson.GetIDFAlertServiceURI(1);
             return appSettingsJson;
         }

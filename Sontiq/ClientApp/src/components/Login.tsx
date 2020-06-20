@@ -14,7 +14,6 @@ type LoginProps = LoginStore.ILoggedInUserState &
     RouteComponentProps<{}>;
 
 class Login extends React.PureComponent<LoginProps> {
-
     constructor(props: any) {
         super(props);
     }
@@ -34,6 +33,7 @@ class Login extends React.PureComponent<LoginProps> {
     handleSubmit(e: any) {
         e.preventDefault();
         this.props.submitLogin(this.state.loginId, this.state.provider);
+        this.props.history.push('/');
     }
 
     public render() {
@@ -42,9 +42,9 @@ class Login extends React.PureComponent<LoginProps> {
             <React.Fragment>
                 <Container className="App">
                     <Form className="form">
-                        <h1>Log inn</h1>
                         <Row>
                             <Col sm="12" md={{ size: 6, offset: 3 }}>
+                                <h1>Login</h1>
                                 <FormGroup>
                                     <Label>Portal Name</Label>
                                     <select className="ui dropdown" name="provider" onChange={(e: any) => this.handleChange(e)} >
