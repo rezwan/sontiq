@@ -6,7 +6,7 @@ export default (props: { children?: React.ReactNode }) => (
     <React.Fragment>
         <NavMenu/>
         <Container>
-            {props.children}
+            {props.children} dddd
         </Container>
     </React.Fragment>
 );

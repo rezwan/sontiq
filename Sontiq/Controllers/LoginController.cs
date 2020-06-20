@@ -17,13 +17,13 @@ namespace Sontiq.Controllers
     {
 
         [HttpPost]
-        public async Task<LoginDTO> Post(string  loginId , string provider)
+        public async Task<LoginDTO> Post(UserLogin userLogin)
         {
             int intLoginId = 0;
-            bool isInteger = int.TryParse(loginId, out intLoginId);
+            int.TryParse(userLogin.loginId, out intLoginId);
 
             ILoginService loginService = new LoginService();
-            return await (isInteger == true ? null : loginService.login(intLoginId, provider));
+            return await  loginService.login(intLoginId, userLogin.provider);
         }
 
         // GET: api/<LoginController>
@@ -35,5 +35,11 @@ namespace Sontiq.Controllers
             return value;
         }
 
+    }
+
+    public class UserLogin
+    {
+        public string loginId { get; set; }
+        public string provider { get; set; }
     }
 }

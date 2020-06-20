@@ -1,5 +1,7 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
@@ -8,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Sontiq.Implementation;
 using Sontiq.Infrastructure;
-
+using Sontiq.Implementation.Utils;
 namespace Sontiq
 {
     public class Startup
@@ -23,17 +25,18 @@ namespace Sontiq
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ILoginService, LoginService>();
             services.AddControllersWithViews();
-
+            services.AddSession();
+            services.AddHttpContextAccessor();
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/build";
             });
             services.AddDistributedMemoryCache();
-            services.AddHttpContextAccessor();
-            services.AddSession();
-            services.AddTransient<ILoginService, LoginService>();
+        
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,10 +55,11 @@ namespace Sontiq
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSpaStaticFiles();
-
-            app.UseRouting();
             app.UseSession();
+            app.UseSpaStaticFiles();
+            Implementation.Utils.AppContext.Configure(app.ApplicationServices.GetRequiredService< IHttpContextAccessor>());
+            app.UseRouting();
+          
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

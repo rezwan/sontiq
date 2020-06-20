@@ -4,18 +4,24 @@ import { AppThunkAction } from '.';
 // STATE - This defines the type of data maintained in the Redux store.
 
 export interface ILoggedInUserState {
-    loggedInUser: string | null;
-    loginId: string | null;
-    isLoggedIn: boolean | null;
-    provider: string | null;
+    userInfo?: UserInfo;
+}
+
+export interface UserInfo {
+    id?: number;
+    fullName?: string;
+    userType?: string;
+    workCaseID?: string;
+    partnerID?: string;
+    subscriptionKey?: string;
 }
 // -----------------
 // ACTIONS - These are serializable (hence replayable) descriptions of state transitions.
 // They do not themselves have any side-effects; they just describe something that is going to happen.
 // Use @typeName and isActionType for type detection that works even after serialization/deserialization.
 
- interface SubmitLoginAction { type: 'SUBMIT_LOGIN', loginId: string, provider: string }
- interface LogoutAction { type: 'LOGOUT' }
+interface SubmitLoginAction { type: 'SUBMIT_LOGIN', userInfo: UserInfo; }
+interface LogoutAction { type: 'LOGOUT', userInfo: { }}
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
@@ -28,21 +34,20 @@ export interface ILoggedInUserState {
 export const actionCreators = {
 
     submitLogin: (loginId: string, provider: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        console.log("login");
-        fetch(`login`, {
+        const requestOptions = {
             method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 loginId: loginId,
                 provider: provider,
             })
-        })
-            .then(response => response.json() as Promise<ILoggedInUserState>)
+        };
+
+        fetch(`api/login`, requestOptions)
+            .then(response => response.json() as Promise<UserInfo>)
             .then(data => {
-                dispatch({ type: 'SUBMIT_LOGIN', loginId, provider });
+                dispatch({ type: 'SUBMIT_LOGIN', userInfo: data });
+                console.log(data);
             });
 
     }
@@ -51,26 +56,22 @@ export const actionCreators = {
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 
+
+
 export const reducer: Reducer<ILoggedInUserState> = (state: ILoggedInUserState | undefined, incomingAction: Action): ILoggedInUserState => {
     if (state === undefined) {
-        return { loggedInUser: null, isLoggedIn: false, loginId: null, provider: null };
+        return { userInfo: {}};
     }
 
     const action = incomingAction as KnownAction;
     switch (action.type) {
         case 'SUBMIT_LOGIN':
             return {
-                loggedInUser: state.loggedInUser,
-                isLoggedIn: state.isLoggedIn,
-                loginId: state.loginId,
-                provider: state.provider
+                userInfo: state.userInfo
             };
         case 'LOGOUT':
             return {
-                loggedInUser: null,
-                isLoggedIn: false,
-                loginId: null,
-                provider: ''
+                userInfo: {}
             };
         default:
             return state;

@@ -12,13 +12,9 @@ namespace Sontiq.Implementation
 {
     public class LoginService : ILoginService
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
         public LoginService()
         {
-        }
-        public LoginService(IHttpContextAccessor httpContextAccessor)
-        {
-            _httpContextAccessor = httpContextAccessor;
+         
         }
 
 
@@ -33,8 +29,7 @@ namespace Sontiq.Implementation
             loginDTO.UserType = "UserType";
             loginDTO.WorkCaseID = "WorkCaseID";
 
-            _httpContextAccessor.HttpContext.Session.SetComplexData( Constants.LOGIN_SESSION_KEY, loginDTO);
-
+            Utils.AppContext.Current.Session.SetComplexData(Constants.LOGIN_SESSION_KEY, loginDTO);
             return await Task.FromResult<LoginDTO>(loginDTO);
         }
     }

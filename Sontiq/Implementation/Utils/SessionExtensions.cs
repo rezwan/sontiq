@@ -9,7 +9,7 @@ namespace Sontiq.Implementation.Utils
 {
     public static class SessionExtensions
     {
-        public static T GetComplexData<T>(this ISession session, string key)
+        public static T GetComplexData<T>(this  ISession session, string key)
         {
             var data = session.GetString(key);
             if (data == null)
