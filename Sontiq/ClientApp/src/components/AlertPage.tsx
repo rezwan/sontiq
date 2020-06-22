@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import { ApplicationState } from '../store';
-import * as Alert from '../store/Alert';
+import * as AlertType from '../store/alert/types';
+import * as AlertActions from '../store/alert/actions';
 
 
 type UserInfoProps =
-    Alert.AlertState
-    & typeof Alert.actionCreators
+    AlertType.AlertState
+    & typeof AlertActions.actionCreators
     & RouteComponentProps<{ startDateIndex: string }>;
 
 class AlertPage extends React.PureComponent<UserInfoProps> {
@@ -39,13 +40,13 @@ class AlertPage extends React.PureComponent<UserInfoProps> {
     }
 
     private renderPagination() {
-        const prevStartDateIndex = (this.props.startDateIndex || 0) - 1;
-        const nextStartDateIndex = (this.props.startDateIndex || 0) + 1;
+        const prevStartDateIndex = (this.props.pageNo || 0) - 1;
+        const nextStartDateIndex = (this.props.pageNo || 0) + 1;
 
         return (
             <div className="d-flex justify-content-between">
                 <Link className='btn btn-outline-secondary btn-sm' to={`/alerts/${prevStartDateIndex}`}>Previous</Link>
-                {this.props.isLoading && <span>Loading...</span>}
+                {/*this.props.isLoading && <span>Loading...</span>*/}
                 <Link className='btn btn-outline-secondary btn-sm' to={`/alerts/${nextStartDateIndex}`}>Next</Link>
             </div>
         );
@@ -87,7 +88,7 @@ class AlertPage extends React.PureComponent<UserInfoProps> {
                 </tr>
                 </thead>
                 <tbody>
-                {this.props.alerts.map((alert: Alert.Alert) =>
+                    {this.props.alertData.map((alert: AlertType.Alert) =>
                     <tr key={alert.id}>
                         <td>{alert.id}</td>
                         <td>{alert.title}</td>
@@ -127,7 +128,7 @@ class AlertPage extends React.PureComponent<UserInfoProps> {
 }
 
 export default connect(
-    (state: ApplicationState) => state.alerts,
-    Alert.actionCreators
+    (state: ApplicationState) => state.alertData,
+    AlertActions.actionCreators
 )(AlertPage as any);
 
