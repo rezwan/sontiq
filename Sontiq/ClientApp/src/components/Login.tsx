@@ -47,9 +47,9 @@ class Login extends React.PureComponent<LoginProps> {
                                 <h1>Login</h1>
                                 <FormGroup>
                                     <Label>Portal Name</Label>
-                                    <select className="ui dropdown" name="provider" onChange={(e: any) => this.handleChange(e)} >
-                                        <option value="1">EZShild</option>
-                                        <option value="2">Identity Force</option>
+                                    <select className="form-control" name="provider" onChange={(e: any) => this.handleChange(e)} >
+                                        <option value="EZS">EZShield</option>
+                                        <option value="IDF">Identity Force</option>
                                     </select>
 
                                 </FormGroup>
