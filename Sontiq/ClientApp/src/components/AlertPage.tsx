@@ -7,17 +7,16 @@ import * as AlertType from '../store/alert/types';
 import * as AlertActions from '../store/alert/actions';
 
 
-type UserInfoProps =
+type AlertProps =
     AlertType.AlertState
     & typeof AlertActions.actionCreators
-    & RouteComponentProps<{ startDateIndex: string }>;
+    & RouteComponentProps<{ pageNo: string }>;
 
-class AlertPage extends React.PureComponent<UserInfoProps> {
+class AlertPage extends React.PureComponent<AlertProps> {
 
     public componentDidMount() {
         this.ensureDataFetched();
     }
-
 
     public componentDidUpdate() {
         this.ensureDataFetched();
@@ -35,19 +34,19 @@ class AlertPage extends React.PureComponent<UserInfoProps> {
     }
 
     private ensureDataFetched() {
-        const startDateIndex = parseInt(this.props.match.params.startDateIndex, 10) || 1;
-        this.props.requestAlerts(startDateIndex);
+        const pageNo = parseInt(this.props.match.params.pageNo, 10) || 1;
+        this.props.requestAlerts(pageNo);
     }
 
     private renderPagination() {
-        const prevStartDateIndex = (this.props.pageNo || 0) - 1;
-        const nextStartDateIndex = (this.props.pageNo || 0) + 1;
+        const prevPageIndex = (this.props.pageNo || 0) - 1;
+        const nextPageIndex = (this.props.pageNo || 0) + 1;
 
         return (
             <div className="d-flex justify-content-between">
-                <Link className='btn btn-outline-secondary btn-sm' to={`/alerts/${prevStartDateIndex}`}>Previous</Link>
+                <Link className='btn btn-outline-secondary btn-sm' to={`/alerts/${prevPageIndex}`}>Previous</Link>
                 {/*this.props.isLoading && <span>Loading...</span>*/}
-                <Link className='btn btn-outline-secondary btn-sm' to={`/alerts/${nextStartDateIndex}`}>Next</Link>
+                <Link className='btn btn-outline-secondary btn-sm' to={`/alerts/${nextPageIndex}`}>Next</Link>
             </div>
         );
     }
@@ -62,10 +61,11 @@ class AlertPage extends React.PureComponent<UserInfoProps> {
                     <th>Type</th>
                     <th>Display Name</th>
                     <th>Generated On</th>
-                        <th>Created</th>
-                        <th>Acknowledged On</th>
+                    <th>Created</th>
+                    <th>Acknowledged On</th>
+
                     {/*
-                     <th>Threat Date</th>
+                    <th>Threat Date</th>
                     <th>Resolve Date</th>
                     <th>Status</th>
                     <th>Viewed</th>
@@ -82,8 +82,7 @@ class AlertPage extends React.PureComponent<UserInfoProps> {
                     <th>Category</th>
                     <th>Available Sub Resource</th>
                     <th>Description</th>
-                     
-                     */}
+                    */}
                     
                 </tr>
                 </thead>

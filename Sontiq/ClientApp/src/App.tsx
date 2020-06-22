@@ -19,6 +19,6 @@ export default () => (
         <DefaultLayout  path='/fetch-data/:startDateIndex?' component={FetchData} />
         <DefaultLayout  path='/user-info' component={UserInfo} />
         <DefaultLayout  path='/user-service/:startDateIndex?' component={UserServiceDetail} />
-        <DefaultLayout  path='/alerts/:startDateIndex?' component={AlertPage} />
+        <DefaultLayout  path='/alerts/:pageNo?' component={AlertPage} />
     </div>
 );
