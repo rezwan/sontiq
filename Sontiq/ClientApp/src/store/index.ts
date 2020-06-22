@@ -1,31 +1,27 @@
-import * as WeatherForecasts from './WeatherForecasts';
-import * as Counter from './Counter';
-import * as UserInformationStore from './UserInformationStore';
-import * as UserServiceStore from './UserServiceStore';
 import * as AlertReducer from './alert/reducers'
 import * as AlertType from './alert/types'
+import * as UserInfoReducer from './userInfo/reducers'
+import * as UserInfo from './userInfo/types'
+import * as UserServiceReducer from './userService/reducers'
+import * as UserService from './userService/types'
 import * as LoginStore from "./LoginStore";
 
 // The top-level state object
 export interface ApplicationState {
-    counter: Counter.CounterState | undefined;
-    weatherForecasts: WeatherForecasts.WeatherForecastsState | undefined;
-    userInformation: UserInformationStore.UserInfoState | undefined;
-    userServiceData: UserServiceStore.UserServiceState | undefined;
     loggedInUser: LoginStore.ILoggedInUserState | undefined;
     alertData: AlertType.AlertState | undefined;
+    userInfoData: UserInfo.UserInfoState | undefined;
+    userServiceData: UserService.UserServiceState | undefined;
 }
 
 // Whenever an action is dispatched, Redux will update each top-level application state property using
 // the reducer with the matching name. It's important that the names match exactly, and that the reducer
 // acts on the corresponding ApplicationState property type.
 export const reducers = {
-    counter: Counter.reducer,
-    weatherForecasts: WeatherForecasts.reducer,
-    userInformation: UserInformationStore.reducer,
-    userServiceData: UserServiceStore.reducer,
     loggedInUser: LoginStore.reducer,
-    alertData: AlertReducer.alertReducer
+    alertData: AlertReducer.alertReducer,
+    userInfoData: UserInfoReducer.userInfoReducer,
+    userServiceData: UserServiceReducer.userServiceReducer
 };
 
 // This type can be used as a hint on action creators so that its 'dispatch' and 'getState' params are

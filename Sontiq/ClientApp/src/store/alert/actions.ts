@@ -2,20 +2,6 @@
 import { AppThunkAction } from '../'; 
 import { REQUEST_ALERTS, RECEIVE_ALERTS, AlertTypes, Alert } from './types';
 
-export function requestAlerts(pageNo: number) {
-    return {
-        type: REQUEST_ALERTS,
-        pageNo: pageNo
-    }
-}
-
-export function receiveAlerts(pageNo: number, alertData: Alert[]) {
-    return {
-        type: RECEIVE_ALERTS,
-        pageNo: pageNo,
-        alertData: alertData
-    }
-}
 
 export const actionCreators = {
     requestAlerts: (pageNo: number): AppThunkAction<AlertTypes> => (dispatch, getState) => {

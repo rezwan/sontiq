@@ -10,7 +10,7 @@ using Sontiq.Models;
 namespace Sontiq.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UserServiceController : ControllerBase
     {
 

@@ -12,7 +12,7 @@ type AlertProps =
     & typeof AlertActions.actionCreators
     & RouteComponentProps<{ pageNo: string }>;
 
-class AlertPage extends React.PureComponent<AlertProps> {
+class Alert extends React.PureComponent<AlertProps> {
 
     public componentDidMount() {
         this.ensureDataFetched();
@@ -129,5 +129,5 @@ class AlertPage extends React.PureComponent<AlertProps> {
 export default connect(
     (state: ApplicationState) => state.alertData,
     AlertActions.actionCreators
-)(AlertPage as any);
+)(Alert as any);
 
