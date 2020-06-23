@@ -9,7 +9,7 @@ import Alert from './components/Alert';
 import UserServiceDetail from './components/UserServiceDetail';
 
 export default () => (
-    <div>
+    <div className="pl-5 pr-5">
         <DefaultLayout exact path='/' component={Home} />
         <GuestLayout  path='/Login' component={Login} />
         <DefaultLayout  path='/user-info' component={UserInfo} />

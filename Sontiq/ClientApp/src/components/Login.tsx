@@ -40,7 +40,7 @@ class Login extends React.PureComponent<LoginProps> {
         const { loginId, provider } = this.state;
         return (
             <React.Fragment>
-                <Container className="App">
+                <Container className="App login-continer">
                     <Form className="form">
                         <Row>
                             <Col sm="12" md={{ size: 6, offset: 3 }}>
@@ -66,7 +66,8 @@ class Login extends React.PureComponent<LoginProps> {
                         <Row>
                             <Col sm="12" md={{ size: 6, offset: 3 }}>
                                 <Button type="button"
-                                    className="btn btn-lg"
+                                    disabled={!loginId}
+                                    className={!loginId ? 'btn btn-lg btn-success disable' : 'btn btn-lg btn-success '}
                                     onClick={(e: any) => this.handleSubmit(e)}>
                                     Submit
                                  </Button>

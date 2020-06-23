@@ -28,3 +28,17 @@ code {
     font-size: 12px;
     text-align: center;
 }
+
+.login-continer {
+    margin-top: 18%;
+    border-style: dashed;
+    border-width: thin;
+    max-width: 700px;
+    padding: 10px 0 10px 0;
+    border-color: #ccc;
+    background-color: #f3f3f3;
+}
+
+.disable {
+    cursor: not-allowed;
+}

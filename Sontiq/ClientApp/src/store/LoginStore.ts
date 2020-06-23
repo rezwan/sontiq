@@ -67,7 +67,7 @@ export const reducer: Reducer<ILoggedInUserState> = (state: ILoggedInUserState |
     switch (action.type) {
         case 'SUBMIT_LOGIN':
             return {
-                userInfo: state.userInfo
+                userInfo: action.userInfo
             };
         case 'LOGOUT':
             return {
