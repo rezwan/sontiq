@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -11,34 +11,37 @@ type UserServiceDetailProps =
     & typeof UserServiceActions.actionCreators
     & RouteComponentProps<{ pageNo: string }>;
 
+const UserServiceDetail: React.SFC<UserServiceDetailProps> = ({
+    match,
+    isLoading,
+    requestUserService,
+    subscriptionDetailData
+}) => {
 
-class UserServiceDetail extends React.PureComponent<UserServiceDetailProps> {
-    public componentDidMount() {
-        this.ensureDataFetched();
+    useEffect(() => {
+        ensureDataFetched();
+    });
+
+    function ensureDataFetched() {
+        const pageNo = parseInt(match.params.pageNo, 10) || 1;
+        requestUserService(pageNo);
     }
 
-    public componentDidUpdate() {
-        this.ensureDataFetched();
-    }
+    function renderPagination() {
+        const prevPageIndex = (parseInt(match.params.pageNo, 10) || 0) - 1;
+        const nextPageIndex = (parseInt(match.params.pageNo, 10) || 0) + 1;
 
-    public render() {
         return (
-            <React.Fragment>
-                <h1 id="tabelLabel">Services</h1>
-                {this.renderUserServiceList()}
-                {this.renderPagination()}
-            </React.Fragment>
+            <div className="d-flex justify-content-between">
+                <Link className='btn btn-outline-secondary btn-sm' to={`/user-service/${prevPageIndex}`}>Previous</Link>
+                {isLoading && <span>Loading...</span>}
+                <Link className='btn btn-outline-secondary btn-sm' to={`/user-service/${nextPageIndex}`}>Next</Link>
+            </div>
         );
     }
 
-    private ensureDataFetched() {
-        const pageNo = parseInt(this.props.match.params.pageNo, 10) || 1;
-        this.props.requestUserService(pageNo);
-    }
-
-    private renderUserServiceList() {
-
-        const serviceList = this.props.subscriptionDetailData ? this.props.subscriptionDetailData.serviceList : [];
+    function renderUserServiceList() {
+        const serviceList = subscriptionDetailData ? subscriptionDetailData.serviceList : [];
         if (serviceList) {
             return (
                 <React.Fragment>
@@ -50,7 +53,7 @@ class UserServiceDetail extends React.PureComponent<UserServiceDetailProps> {
                                     <div>
                                         <span>{service.displayName}</span><br />
                                         <div className="service-status-bar"
-                                        >{service.active ? "ACTIVE -" : "INACTIVE"}&nbsp;{(service.active && this.props.subscriptionDetailData) ? this.props.subscriptionDetailData.subscriptionType : ''}</div>
+                                        >{service.active ? "ACTIVE -" : "INACTIVE"}&nbsp;{(service.active && subscriptionDetailData) ? subscriptionDetailData.subscriptionType : ''}</div>
                                     </div>
                                 </div>
                             </li>
@@ -61,22 +64,17 @@ class UserServiceDetail extends React.PureComponent<UserServiceDetailProps> {
             );
         }
         return ("");
-
     }
 
-    private renderPagination() {
-        const prevPageIndex = (this.props.pageNo || 0) - 1;
-        const nextPageIndex = (this.props.pageNo || 0) + 1;
+    return (
+        <React.Fragment>
+            <h1 id="tabelLabel">Services</h1>
+            {renderUserServiceList()}
+            {renderPagination()}
+        </React.Fragment>
+    );
 
-        return (
-            <div className="d-flex justify-content-between">
-                <Link className='btn btn-outline-secondary btn-sm' to={`/user-service/${prevPageIndex}`}>Previous</Link>
-                {this.props.isLoading && <span>Loading...</span>}
-                <Link className='btn btn-outline-secondary btn-sm' to={`/user-service/${nextPageIndex}`}>Next</Link>
-            </div>
-        );
-    }
-}
+};
 
 export default connect(
     (state: ApplicationState) => state.userServiceData,
